@@ -1,12 +1,5 @@
-<?php
-include 'config.php';
-include 'functions.php';
+<?php include 'catalog.php'; ?>
 
-
-$categories = get_cat();
-$categories_tree = map_tree($categories);
-$categories_menu = categories_to_string($categories_tree);
-?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -49,7 +42,8 @@ $categories_menu = categories_to_string($categories_tree);
             </div>
             <div class="col-sm-8">
                 <main class="catalog">
-
+                    <p class="breadcrumbs"><?=$breadcrumbs; ?></p>
+                    <?php print_arr($categories); ?>
                 </main>
             </div>
         </div>

@@ -37,7 +37,6 @@ function map_tree($dataset) {
     }
     return $tree;
 }
-
 /**
  * Дерево в HTML строку
  */
@@ -57,6 +56,24 @@ function categories_to_template($category){
     ob_start(); // Начинаем буферизацию вывода
     include 'category_template.php';
     return ob_get_clean(); // Очищаем буфер
+}
+
+/**
+ * Хлебные крошки
+ */
+function breadcrumbs($categories, $id_category){
+    if (!$id_category) return false;
+
+    $count = count($categories);
+    $breadcrumbs_array = [];
+
+    for ($i = 0; $i < $count; $i++){
+        if ($categories[$id_category]) {
+            $breadcrumbs_array[$categories[$id_category]['id']] =  $categories[$id_category]['title'];
+            $id_category = $categories[$id_category]['parent'];
+        }else break;
+    }
+    return  array_reverse($breadcrumbs_array, true);
 }
 
 
