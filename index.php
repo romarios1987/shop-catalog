@@ -51,7 +51,7 @@
                         <?php endif; ?>
 
                         <?php foreach($products as $product): ?>
-                            <a href="?product=<?=$product['id']?>"><?=$product['title']?></a><br>
+                            <a href="<?=PATH?>product.php?product=<?=$product['id']?>"><?=$product['title']?></a><br>
                         <?php endforeach; ?>
 
                         <?php if( $count_pages > 1 ): ?>
@@ -62,7 +62,6 @@
                         <p>Здесь товаров нет!</p>
                     <?php endif; ?>
                     <hr>
-                    <?php print_arr($categories); ?>
                 </main>
             </div>
         </div>

@@ -115,6 +115,21 @@ function get_products($ids, $start_pos, $perpage){
 }
 
 /**
+ * Ф-я получения отдельного товара
+ */
+function get_one_product($product_id){
+    global $connection;
+    $query = "SELECT * FROM products WHERE id = $product_id";
+    $res = mysqli_query($connection, $query);
+
+
+    return mysqli_fetch_assoc($res);
+}
+
+
+
+
+/**
  * Ф-я получения общего количества товаров
  */
 function count_goods($ids){
