@@ -44,14 +44,23 @@
                 <main class="catalog">
                     <p class="breadcrumbs"><?=$breadcrumbs; ?></p>
                     <hr>
-                    <?php if ($products){
-                        echo "<div class='pagination'>$pagenation</div>";
-                        foreach($products as  $product){
-                            echo "<a href='?product=".$product['id']."'>".$product['title']."</a><br>";
-                        }
-                    }else{
-                        echo "<p>Нету товаров!</p>";
-                    } ?>
+                    <?php if($products): ?>
+
+                        <?php if( $count_pages > 1 ): ?>
+                            <div class="pagination"><?=$pagination?></div>
+                        <?php endif; ?>
+
+                        <?php foreach($products as $product): ?>
+                            <a href="?product=<?=$product['id']?>"><?=$product['title']?></a><br>
+                        <?php endforeach; ?>
+
+                        <?php if( $count_pages > 1 ): ?>
+                            <div class="pagination"><?=$pagination?></div>
+                        <?php endif; ?>
+
+                    <?php else: ?>
+                        <p>Здесь товаров нет!</p>
+                    <?php endif; ?>
                     <hr>
                     <?php print_arr($categories); ?>
                 </main>

@@ -43,12 +43,12 @@ $categories_menu = categories_to_string($categories_tree);
     }
     if ($page > $count_pages) $page = $count_pages; // Если запрошеная страница больше максимума
 
-    echo $start_pos = ($page - 1) * $perpage; // Начальная позьция для запроса
+    $start_pos = ($page - 1) * $perpage; // Начальная позьция для запроса
 
-    $pagenation = pagenation($page, $count_pages);
+    $pagination = pagination($page, $count_pages);
     /***Пагинация***/
 
-$products = get_products($ids, $start_pos, $perpage);
+    $products = get_products($ids, $start_pos, $perpage);
 
 
 
