@@ -21,7 +21,7 @@ ul,li{
     padding: 0;
 }
 a{
-    color: #ffffff;
+    color: #212121;
 }
 
 a:hover, a:focus{
@@ -91,3 +91,11 @@ a:hover, a:focus{
 .breadcrumbs a:hover{
     text-decoration: underline;
 }
+
+
+.pagination{
+    margin: 20px;
+}
+
+
+

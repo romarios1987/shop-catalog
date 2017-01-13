@@ -43,6 +43,16 @@
             <div class="col-sm-8">
                 <main class="catalog">
                     <p class="breadcrumbs"><?=$breadcrumbs; ?></p>
+                    <hr>
+                    <?php if ($products){
+                        echo "<div class='pagination'>$pagenation</div>";
+                        foreach($products as  $product){
+                            echo "<a href='?product=".$product['id']."'>".$product['title']."</a><br>";
+                        }
+                    }else{
+                        echo "<p>Нету товаров!</p>";
+                    } ?>
+                    <hr>
                     <?php print_arr($categories); ?>
                 </main>
             </div>
