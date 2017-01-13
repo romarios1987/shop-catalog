@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="bootstrap-grid.css">
     <link rel="stylesheet" href="style.css">
 
-    <title>Document</title>
+    <title>Каталог</title>
 </head>
 <body>
     <header>
@@ -44,6 +44,14 @@
                 <main class="catalog">
                     <p class="breadcrumbs"><?=$breadcrumbs; ?></p>
                     <hr>
+                    <div>
+                        <select name="perpage" id="perpage">
+                            <?php foreach ($option_perpage as  $option): ?>
+                                <option <?php if ($perpage == $option) echo "selected"; ?> value="<?=$option;?>"><?=$option;?> Товаров на страницу</option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
                     <?php if($products): ?>
 
                         <?php if( $count_pages > 1 ): ?>
@@ -74,6 +82,13 @@
     <script>
         $(document).ready(function () {
             $(".categories").dcAccordion();
+
+            /*** Создаем куку для выбора количества товаров  ***/
+            $("#perpage").change(function () {
+                var perPage = this.value;  // $(this).val()-по другому запись
+               $.cookie('per_page', perPage, {expires: 7});
+               window.location = location.href;
+            })
         })
     </script>
 </body>
