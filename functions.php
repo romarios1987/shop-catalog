@@ -148,7 +148,7 @@ function count_goods($ids){
 /**
  * Постраничная навигация
  */
-function pagination($page, $count_pages){
+function pagination($page, $count_pages, $modrew = true){
     // << < 3 4 5 6 7 > >>
     // $back - ссылка НАЗАД
     // $forward - ссылка ВПЕРЕД
@@ -160,10 +160,21 @@ function pagination($page, $count_pages){
     // $page1right - первая страница справа
 
     $uri = '?';
-    // Если есть параметры в запросе
-    if ($_SERVER['QUERY_STRING']){
-        foreach ($_GET as $key => $value) {
-            if($key != 'page') $uri .= "{$key}=$value&amp;";
+    if (!$modrew){
+        // Если есть параметры в запросе
+        if ($_SERVER['QUERY_STRING']){
+            foreach ($_GET as $key => $value) {
+                if($key != 'page') $uri .= "{$key}=$value&amp;";
+            }
+        }
+    }else{
+        $url = $_SERVER['REQUEST_URI'];
+        $url = explode("?", $url);
+        if (isset($url[1]) && $url[1] != ''){
+            $params = explode("&", $url[1]);
+            foreach ($params as $param) {
+              if (!preg_match("#page=#", $param))$uri .= "{$param}&amp;";
+            }
         }
     }
 

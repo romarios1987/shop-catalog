@@ -22,7 +22,7 @@ $breadcrumbs_array = breadcrumbs($categories, $id_category);
 if ($breadcrumbs_array) {
     $breadcrumbs = "<a href='" . PATH . "'>Главная</a> / ";
     foreach ($breadcrumbs_array as $id => $title) {
-        $breadcrumbs .= "<a href='" . PATH . "?category={$id}'>{$title}</a> / ";
+        $breadcrumbs .= "<a href='" . PATH . "category/{$id}'>{$title}</a> / ";
     }
     if (!isset($get_one_product)) {
         $breadcrumbs = rtrim($breadcrumbs, " / ");
@@ -40,7 +40,7 @@ $ids = !$ids ? $id_category : rtrim($ids, ",");
 
 
 /***Пагинация***/
-echo $perpage = (int)$_COOKIE['per_page'] ? $_COOKIE['per_page'] : PERPAGE; // Количество товаров на страницу
+$perpage = (int)$_COOKIE['per_page'] ? $_COOKIE['per_page'] : PERPAGE; // Количество товаров на страницу
 
 $count_goods = count_goods($ids); // Общее количество товаров
 
