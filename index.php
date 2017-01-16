@@ -1,6 +1,7 @@
 <?php
 define("CATALOG", true);
 
+error_reporting(E_ALL);
 include 'config.php';
 include 'functions.php';
 
@@ -31,6 +32,8 @@ extract($match);
 // $id_category - ID категории
 // $product_alias - alias продукта
 // $view - вид для подключения
+
+if (!isset($id_category)) $id_category = null;
 
 
 $categories = get_cat();
@@ -66,7 +69,6 @@ if ($breadcrumbs_array) {
 // id  дочерних категорий
 $ids = cats_id($categories, $id_category);
 $ids = !$ids ? $id_category : rtrim($ids, ",");
-
 
 /***Пагинация***/
 $perpage = (int)$_COOKIE['per_page'] ? $_COOKIE['per_page'] : PERPAGE; // Количество товаров на страницу

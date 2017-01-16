@@ -68,7 +68,7 @@ function breadcrumbs($categories, $id_category){
     $breadcrumbs_array = [];
 
     for ($i = 0; $i < $count; $i++){
-        if ($categories[$id_category]) {
+        if (isset($categories[$id_category])) {
             $breadcrumbs_array[$categories[$id_category]['id']] =  $categories[$id_category]['title'];
             $id_category = $categories[$id_category]['parent'];
         }else break;
@@ -151,14 +151,14 @@ function count_goods($ids){
  */
 function pagination($page, $count_pages, $modrew = true){
     // << < 3 4 5 6 7 > >>
-    // $back - ссылка НАЗАД
-    // $forward - ссылка ВПЕРЕД
-    // $startpage - ссылка В НАЧАЛО
-    // $endpage - ссылка В КОНЕЦ
-    // $page2left - вторая страница слева
-    // $page1left - первая страница слева
-    // $page2right - вторая страница справа
-    // $page1right - первая страница справа
+    $back = null;//-ссылка НАЗАД
+    $forward = null;//-ссылка ВПЕРЕД
+    $startpage = null;//-ссылка В НАЧАЛО
+    $endpage = null;//-ссылка В КОНЕЦ
+    $page2left = null;//-вторая страница слева
+    $page1left = null;//-первая страница слева
+    $page2right = null;//-вторая страница справа
+    $page1right = null;//-первая страница справа
 
     $uri = '?';
     if (!$modrew){
