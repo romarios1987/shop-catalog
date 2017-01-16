@@ -1,15 +1,23 @@
 AddDefaultCharset utf-8
 
+#Заприщает просмотр каталога если там нет индексного файла
+Options -Indexes
+
 RewriteEngine On
 RewriteBase /
 
-RewriteRule ^product/([a-z0-9-]+) product.php?product=$1
-RewriteRule ^category/(\d+) index.php?category=$1 [QSA]
+#Задаем условия для RewriteRule (если обращения идет не к реальному файлу то переходим по index.php)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#Любой запрос будет перенаправлен в index.php
+RewriteRule .* index.php
+
+# RewriteRule ^product/([a-z0-9-]+) product.php?product=$1
+# RewriteRule ^category/(\d+) category.php?category=$1 [QSA]
 
 # ?category=696
 # category/696
 # http://shop-catalog.local/category/696?category=696&page=3
-
 
 #  product.php?product=12448
 #  product/12448

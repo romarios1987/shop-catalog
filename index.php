@@ -1,95 +1,100 @@
-<?php include 'catalog.php'; ?>
+<?php
+define("CATALOG", true);
 
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?=PATH?>bootstrap-grid.css">
-    <link rel="stylesheet" href="<?=PATH?>style.css">
+include 'config.php';
+include 'functions.php';
 
-    <title>Каталог</title>
-</head>
-<body>
-    <header>
-        <div class="top-line"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <nav class="main-menu">
-                        <ul>
-                            <li><a href="/">Главная</a></li>
-                            <li><a href="#">О нас</a></li>
-                            <li><a href="#">Контакты</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-4">
-                <aside class="sidebar">
-                    <div>
-                        <ul class="categories">
-                            <?php echo $categories_menu; ?>
-                        </ul>
-                    </div>
-                </aside>
-            </div>
-            <div class="col-sm-8">
-                <main class="catalog">
-                    <p class="breadcrumbs"><?=$breadcrumbs; ?></p>
-                    <hr>
-                    <div>
-                        <select name="perpage" id="perpage">
-                            <?php foreach ($option_perpage as  $option): ?>
-                                <option <?php if ($perpage == $option) echo "selected"; ?> value="<?=$option;?>"><?=$option;?> Товаров на страницу</option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
+/**
+ * Функция маршрутизации (Роутинга)
+ */
+$routes = [
+    array('url' => '#^$|^\?#', 'view' => 'category'),
+    array('url' => '#^product/(?P<product_alias>[a-z0-9-]+)#i', 'view' => 'product'),
+    array('url' => '#^category/(?P<id_category>\d+)#i', 'view' => 'category')
+];
 
-                    <?php if($products): ?>
+$url = ltrim($_SERVER['REQUEST_URI'], '/');
 
-                        <?php if( $count_pages > 1 ): ?>
-                            <div class="pagination"><?=$pagination?></div>
-                        <?php endif; ?>
+foreach ($routes as $route) {
+    if( preg_match($route['url'], $url, $match) ){
+        $view = $route['view'];
+        break;
+    }
+}
 
-                        <?php foreach($products as $product): ?>
-                            <a href="<?=PATH?>product/<?=$product['alias']?>"><?=$product['title']?></a><br>
-                        <?php endforeach; ?>
+if( empty($match) ){
+    include 'views/404.php';
+    exit;
+}
+extract($match);
 
-                        <?php if( $count_pages > 1 ): ?>
-                            <div class="pagination"><?=$pagination?></div>
-                        <?php endif; ?>
-
-                    <?php else: ?>
-                        <p>Здесь товаров нет!</p>
-                    <?php endif; ?>
-                    <hr>
-                </main>
-            </div>
-        </div>
-    </div>
-    <script src="<?=PATH?>js/jquery-1.9.0.min.js"></script>
-    <script src="<?=PATH?>js/jquery.accordion.js"></script>
-    <script src="<?=PATH?>js/jquery.cookie.js"></script>
+// $id_category - ID категории
+// $product_alias - alias продукта
+// $view - вид для подключения
 
 
-    <script>
-        $(document).ready(function () {
-            $(".categories").dcAccordion();
+$categories = get_cat();
+$categories_tree = map_tree($categories);
+$categories_menu = categories_to_string($categories_tree);
 
-            /*** Создаем куку для выбора количества товаров  ***/
-            $("#perpage").change(function () {
-                var perPage = this.value;  // $(this).val()-по другому запись
-               $.cookie('per_page', perPage, {expires: 7});
-               window.location = location.href;
-            })
-        })
-    </script>
-</body>
-</html>
+/**
+ * может быть либо ID продукта, либо ID категории... если есть ID продукта, тогда ID категории возьмем из поля parent, иначе - возьмем сразу из параметра  **/
+
+if (isset($product_alias)) {
+    $get_one_product = get_one_product($product_alias);  // Массив данных о продукте
+    $id_category = $get_one_product['parent'];  // Получаем ID категории
+}
+
+/*** Хлебные крошки ***/
+// return true (array not empty) || false
+$breadcrumbs_array = breadcrumbs($categories, $id_category);
+if ($breadcrumbs_array) {
+    $breadcrumbs = "<a href='" . PATH . "'>Главная</a> / ";
+    foreach ($breadcrumbs_array as $id => $title) {
+        $breadcrumbs .= "<a href='" . PATH . "category/{$id}'>{$title}</a> / ";
+    }
+    if (!isset($get_one_product)) {
+        $breadcrumbs = rtrim($breadcrumbs, " / ");
+        $breadcrumbs = preg_replace("#(.+)?<a.+>(.+)</a>$#", "$1$2", $breadcrumbs);
+    } else {
+        $breadcrumbs .= $get_one_product['title'];
+    }
+} else {
+    $breadcrumbs = "<a href='" . PATH . "'>Главная</a> / Каталог";
+}
+
+// id  дочерних категорий
+$ids = cats_id($categories, $id_category);
+$ids = !$ids ? $id_category : rtrim($ids, ",");
+
+
+/***Пагинация***/
+$perpage = (int)$_COOKIE['per_page'] ? $_COOKIE['per_page'] : PERPAGE; // Количество товаров на страницу
+
+$count_goods = count_goods($ids); // Общее количество товаров
+
+// необходимое количество страниц
+$count_pages = ceil($count_goods / $perpage); // Округляем
+if (!$count_pages) $count_pages = 1; // Должна быть мимисум 1 страница
+if (isset($_GET['page'])) { // Получения запрошеной страницы
+    $page = (int)$_GET['page'];
+    if ($page < 1) $page = 1;
+} else {
+    $page = 1;
+}
+if ($page > $count_pages) $page = $count_pages; // Если запрошеная страница больше максимума
+
+$start_pos = ($page - 1) * $perpage; // Начальная позиция для запроса
+
+$pagination = pagination($page, $count_pages);
+/***Пагинация***/
+
+$products = get_products($ids, $start_pos, $perpage);
+
+
+
+include "views/{$view}.php";
+
+
+
+

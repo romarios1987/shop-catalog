@@ -1,5 +1,4 @@
-<?php include 'catalog.php'; ?>
-
+<?php defined("CATALOG") or die("Access denied"); ?>
 <!doctype html>
 <html lang="ru">
 <head>
@@ -7,8 +6,8 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?=PATH?>bootstrap-grid.css">
-    <link rel="stylesheet" href="<?=PATH?>style.css">
+    <link rel="stylesheet" href="<?=PATH?>views/bootstrap-grid.css">
+    <link rel="stylesheet" href="<?=PATH?>views/style.css">
     <title>Каталог</title>
 </head>
 <body>
@@ -55,9 +54,9 @@
 </div>
 
 
-<script src="<?=PATH?>js/jquery-1.9.0.min.js"></script>
-<script src="<?=PATH?>js/jquery.accordion.js"></script>
-<script src="<?=PATH?>js/jquery.cookie.js"></script>
+<script src="<?=PATH?>views/js/jquery-1.9.0.min.js"></script>
+<script src="<?=PATH?>views/js/jquery.accordion.js"></script>
+<script src="<?=PATH?>views/js/jquery.cookie.js"></script>
 
 
 <script>

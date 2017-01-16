@@ -2,10 +2,10 @@
 /**
  * Ф-я для удобной разпечатки массивов
  */
+
 function print_arr($array){
     echo "<pre>". print_r($array, true) ."</pre>";
 }
-
 
 /**
  * Получаем данные из таблицы категорий
@@ -54,7 +54,7 @@ function categories_to_string($array_categories){
  */
 function categories_to_template($category){
     ob_start(); // Начинаем буферизацию вывода
-    include 'category_template.php';
+    include 'views/category_template.php';
     return ob_get_clean(); // Очищаем буфер
 }
 

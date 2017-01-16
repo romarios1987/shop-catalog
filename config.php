@@ -1,3 +1,4 @@
+<?php defined("CATALOG") or die("Access denied"); ?>
 <?php
 define("DBHOST", "localhost");
 define("DBUSER", "root");
