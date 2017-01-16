@@ -55,9 +55,9 @@
 </div>
 
 
-<script src="js/jquery-1.9.0.min.js"></script>
-<script src="js/jquery.accordion.js"></script>
-<script src="js/jquery.cookie.js"></script>
+<script src="<?=PATH?>js/jquery-1.9.0.min.js"></script>
+<script src="<?=PATH?>js/jquery.accordion.js"></script>
+<script src="<?=PATH?>js/jquery.cookie.js"></script>
 
 
 <script>

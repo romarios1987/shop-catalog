@@ -59,7 +59,7 @@
                         <?php endif; ?>
 
                         <?php foreach($products as $product): ?>
-                            <a href="<?=PATH?>product/<?=$product['id']?>"><?=$product['title']?></a><br>
+                            <a href="<?=PATH?>product/<?=$product['alias']?>"><?=$product['title']?></a><br>
                         <?php endforeach; ?>
 
                         <?php if( $count_pages > 1 ): ?>
@@ -74,9 +74,9 @@
             </div>
         </div>
     </div>
-    <script src="js/jquery-1.9.0.min.js"></script>
-    <script src="js/jquery.accordion.js"></script>
-    <script src="js/jquery.cookie.js"></script>
+    <script src="<?=PATH?>js/jquery-1.9.0.min.js"></script>
+    <script src="<?=PATH?>js/jquery.accordion.js"></script>
+    <script src="<?=PATH?>js/jquery.cookie.js"></script>
 
 
     <script>

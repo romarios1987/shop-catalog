@@ -7,10 +7,16 @@ $categories_tree = map_tree($categories);
 $categories_menu = categories_to_string($categories_tree);
 
 
-if (isset($_GET['product'])) {
-    $product_id = (int)$_GET['product'];
 
-    $get_one_product = get_one_product($product_id);  // Массив данных о продукте
+/**
+ * может быть либо ID продукта, либо ID категории... если есть ID продукта, тогда ID категории возьмем из поля parent, иначе - возьмем сразу из параметра  **/
+
+if (isset($_GET['product'])) {
+
+
+    // $product_id = (int)$_GET['product'];
+    $product_alias = $_GET['product'];
+    $get_one_product = get_one_product($product_alias);  // Массив данных о продукте
     $id_category = $get_one_product['parent'];  // Получаем ID категории
 } else {
     $id_category = (int)$_GET['category'];

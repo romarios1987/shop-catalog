@@ -3,7 +3,7 @@ AddDefaultCharset utf-8
 RewriteEngine On
 RewriteBase /
 
-RewriteRule ^product/(\d+)/?$ product.php?product=$1
+RewriteRule ^product/([a-z0-9-]+) product.php?product=$1
 RewriteRule ^category/(\d+) index.php?category=$1 [QSA]
 
 # ?category=696
