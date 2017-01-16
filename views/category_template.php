@@ -1,3 +1,4 @@
+<?php defined("CATALOG") or die("Access denied"); ?>
 <li>
     <a href="<?=PATH?>category/<?=$category['id']?>"><?=$category['title']?></a>
     <?php if (isset($category['childs']) && $category['childs']): ?>

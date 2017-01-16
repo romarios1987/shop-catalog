@@ -33,9 +33,7 @@
             <div class="col-sm-4">
                 <aside class="sidebar">
                     <div>
-                        <ul class="categories">
-                            <?php echo $categories_menu; ?>
-                        </ul>
+                        <?php include 'sidebar.php';?>
                     </div>
                 </aside>
             </div>
