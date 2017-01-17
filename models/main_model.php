@@ -25,11 +25,6 @@ function get_pages(){
     return $pages;
 }
 
-
-
-
-
-
 /**
  * Получаем данные из таблицы категорий
  */
@@ -68,11 +63,11 @@ function map_tree($dataset)
  * Дерево в HTML строку
  */
 
-function categories_to_string($array_categories)
+function categories_to_string($array_categories, $template = 'category_template.php')
 {
     $string = '';
     foreach ($array_categories as $item) {
-        $string .= categories_to_template($item);
+        $string .= categories_to_template($item, $template);
     }
     return $string;
 }
@@ -80,10 +75,10 @@ function categories_to_string($array_categories)
 /**
  * Шаблон вывода категорий
  */
-function categories_to_template($category)
+function categories_to_template($category, $template)
 {
     ob_start(); // Начинаем буферизацию вывода
-    include 'views/category_template.php';
+    include "views/{$template}";
     return ob_get_clean(); // Очищаем буфер
 }
 

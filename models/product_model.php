@@ -11,3 +11,18 @@ function get_one_product($product_alias){
 
     return mysqli_fetch_assoc($res);
 }
+
+/**
+ *Ф-я получения комментариев
+ */
+function get_comments($product_id){
+    global $connection;
+    $query = "SELECT * FROM comments WHERE comment_product = $product_id";
+    $res = mysqli_query($connection, $query);
+
+    $comments = [];
+    while ($row = mysqli_fetch_assoc($res)){
+        $comments[$row['comment_id']] = $row;
+    }
+    return $comments;
+}

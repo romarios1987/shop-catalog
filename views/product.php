@@ -42,6 +42,11 @@
                 <?php else: ?>
                     <p>Такого товара нету!</p>
                 <?php endif; ?>
+                <hr>
+                <h3>Отзывы к товару (0)</h3>
+                <ul class="comments">
+                    <?php echo $comments; ?>
+                </ul>
             </main>
         </div>
     </div>

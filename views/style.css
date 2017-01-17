@@ -124,3 +124,43 @@ a:hover, a:focus{
     color: #fff;
     border-color: #428bca;
 }
+/*Comments styles*/
+.comments{
+    margin: 20px 0;
+    word-wrap: break-word;
+}
+.comments ul{
+    padding-left: 20px;
+}
+.comment-content{
+    border-bottom: 1px solid #212121;
+    border-left:1px solid #212121;
+    margin: 10px 0 0 0;
+    padding: 15px;
+}
+.comment-meta{
+    background: #fff;
+    display: flex;
+    padding: 5px 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+.comment-meta .date{
+    font-size: 11px;
+    float: right;
+}
+
+
+.comment-content a{
+    background: #00BCD4;
+    padding: 5px 15px;
+}
+.comment-content a:hover{
+    background: #009688;
+    color: #fff;
+
+}
+.manager .author{
+    font-weight: 600;
+
+}
