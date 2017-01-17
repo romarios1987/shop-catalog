@@ -11,21 +11,21 @@ is_admin - принадлежит ли комментарий админ сай�
 ?>
 <?php defined("CATALOG") or die("Access denied"); ?>
 <li>
-    <div class="comment-content<?php if ($category['is_admin']) echo ' manager'?>">
+    <div class="comment-content<?php if ($category['is_admin']) echo ' manager' ?>">
         <div class="comment-meta">
-            <span class="author"><?= htmlspecialchars($category['comment_author']);?></span>
+            <span class="author"><?= htmlspecialchars($category['comment_author']); ?></span>
             <span class="date"><?= $category['created_date'] ?></span>
         </div>
         <div class="comment-text">
-            <p><?= nl2br(htmlspecialchars($category['comment_text']));?></p>
-            <a href="#<?=$category['comment_id']?>">Ответить</a>
+            <p><?= nl2br(htmlspecialchars($category['comment_text'])); ?></p>
+            <a class="open-form reply" data="<?= $category['comment_id'] ?>">Ответить</a>
         </div>
     </div>
-        <?php if (isset($category['childs']) && $category['childs']): ?>
-            <ul>
-                <?php echo categories_to_string($category['childs'], 'comments_template.php') ?>
-            </ul>
-        <?php endif; ?>
+    <?php if (isset($category['childs']) && $category['childs']): ?>
+        <ul>
+            <?php echo categories_to_string($category['childs'], 'comments_template.php') ?>
+        </ul>
+    <?php endif; ?>
 
 </li>
 

@@ -9,6 +9,14 @@
 .secondary-text-color  { color: #757575; }
 .divider-color         { border-color: #BDBDBD; }
 
+* {
+    margin: 0;
+    padding: 0;
+}
+html,
+body {
+    height: 100%;
+}
 
 body{
     background: #B2EBF2;
@@ -27,6 +35,24 @@ a{
 a:hover, a:focus{
     text-decoration: none;
 }
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+header{
+    flex: 1 0 auto;
+}
+.content{
+    flex: 2 1 auto;
+    padding-bottom: 50px;
+    padding-top: 35px;
+}
+.main-footer{
+    flex: 0 0 auto;
+}
+
 
 
 .main-menu{
@@ -57,7 +83,6 @@ a:hover, a:focus{
 
 .categories{
     background: #00BCD4;
-    margin-top: 30px;
     padding: 5px;
 }
 .categories a.active{
@@ -130,13 +155,13 @@ a:hover, a:focus{
     word-wrap: break-word;
 }
 .comments ul{
-    padding-left: 20px;
+    padding-left: 30px;
 }
 .comment-content{
     border-bottom: 1px solid #212121;
     border-left:1px solid #212121;
     margin: 10px 0 0 0;
-    padding: 15px;
+    padding: 0 15px 15px;
 }
 .comment-meta{
     background: #fff;
@@ -149,11 +174,16 @@ a:hover, a:focus{
     font-size: 11px;
     float: right;
 }
-
+.comment-content p{
+    margin-top: 5px;
+}
 
 .comment-content a{
     background: #00BCD4;
     padding: 5px 15px;
+    display: inline-block;
+    margin-top: 25px;
+    cursor: pointer;
 }
 .comment-content a:hover{
     background: #009688;
@@ -162,5 +192,73 @@ a:hover, a:focus{
 }
 .manager .author{
     font-weight: 600;
+}
+/* Form */
+.form p{
+    margin-bottom: 20px;
+}
+.form label{
+    width: 180px;
+    float: left;
+    color: #999;
+    padding-top: 5px;
+}
+.form input{
+    width: 400px;
+}
+.form textarea{
+    width: 400px;
+    max-width: 400px;
+    min-width: 400px;
+    line-height: 150%;
+}
+.form input[type="checkbox"]{
+    width: auto;
+}
 
+.form input, .form textarea, .form select{
+    padding: 9px;
+    border: 1px solid #E5E5E5;
+    border-radius: 5px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+    background: #FFF url('img/bg.jpg') left top repeat-x;
+}
+
+.form input:hover, .form textarea:hover, .form select:hover,
+.form input:focus, .form textarea:focus, .form select:focus{
+    border-color: #C9C9C9;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+button.open-form,
+.form .submit input{
+    width: auto;
+    background: #617798;
+    color: #FFF;
+    padding: 9px 15px;
+    border: 0;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+button.open-form:hover,
+.form .submit input:hover{
+    background: #2B415E;
+}
+
+.reply:hover{
+    text-decoration: none;
+}
+
+
+
+/*Footer*/
+.main-footer {
+    padding: 30px 0;
+    background: #212121;
+    color: #ffffff;
 }
