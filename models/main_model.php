@@ -9,6 +9,27 @@ function print_arr($array)
     echo "<pre>" . print_r($array, true) . "</pre>";
 }
 
+
+/**
+ * Ф-я получения страниц
+ */
+function get_pages(){
+    global $connection;
+    $query = "SELECT title, alias FROM pages ORDER BY position";
+    $res = mysqli_query($connection, $query);
+
+    $pages = [];
+    while ($row = mysqli_fetch_assoc($res)) {
+        $pages[$row['alias']] = $row['title'];
+    }
+    return $pages;
+}
+
+
+
+
+
+
 /**
  * Получаем данные из таблицы категорий
  */

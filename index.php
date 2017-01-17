@@ -7,7 +7,8 @@ error_reporting(E_ALL);
 $routes = [
     array('url' => '#^$|^\?#', 'view' => 'category'),
     array('url' => '#^product/(?P<product_alias>[a-z0-9-]+)#i', 'view' => 'product'),
-    array('url' => '#^category/(?P<id_category>\d+)#i', 'view' => 'category')
+    array('url' => '#^category/(?P<id_category>\d+)#i', 'view' => 'category'),
+    array('url' => '#^page/(?P<page_alias>[a-z0-9-]+)#i', 'view' => 'page'),
 ];
 
 $url = ltrim($_SERVER['REQUEST_URI'], '/');

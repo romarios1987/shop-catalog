@@ -37,11 +37,9 @@
             <main class="catalog">
                 <p class="breadcrumbs"><?= $breadcrumbs; ?></p>
                 <hr>
-                <?php if ($get_one_product): ?>
-                    <?php print_arr($get_one_product); ?>
-                <?php else: ?>
-                    <p>Такого товара нету!</p>
-                <?php endif; ?>
+
+           <?=$page['text']; ?>
+
             </main>
         </div>
     </div>

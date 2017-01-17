@@ -13,7 +13,8 @@ $ids = !$ids ? $id_category : rtrim($ids, ",");
 
 
 /***Пагинация***/
-$perpage = (int)$_COOKIE['per_page'] ? $_COOKIE['per_page'] : PERPAGE; // Количество товаров на страницу
+// Количество товаров на страницу
+$perpage = ( isset($_COOKIE['per_page']) && (int)$_COOKIE['per_page'] ) ? $_COOKIE['per_page'] : PERPAGE;
 
 $count_goods = count_goods($ids); // Общее количество товаров
 

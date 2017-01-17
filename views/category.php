@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="<?=PATH?>views/bootstrap-grid.css">
     <link rel="stylesheet" href="<?=PATH?>views/style.css">
 
-    <title>Каталог</title>
+    <title><?=strip_tags($breadcrumbs); ?></title>
 </head>
 <body>
     <header>
@@ -18,11 +18,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <nav class="main-menu">
-                        <ul>
-                            <li><a href="/">Главная</a></li>
-                            <li><a href="#">О нас</a></li>
-                            <li><a href="#">Контакты</a></li>
-                        </ul>
+                        <?php include 'menu.php';?>
                     </nav>
                 </div>
             </div>
