@@ -9,6 +9,7 @@ $routes = [
     array('url' => '#^product/(?P<product_alias>[a-z0-9-]+)#i', 'view' => 'product'),
     array('url' => '#^category/(?P<id_category>\d+)#i', 'view' => 'category'),
     array('url' => '#^page/(?P<page_alias>[a-z0-9-]+)#i', 'view' => 'page'),
+    array('url' => '#^add_comment#i', 'view' => 'add_comment'),
 ];
 
 $url = ltrim($_SERVER['REQUEST_URI'], '/');

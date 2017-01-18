@@ -1,5 +1,8 @@
 AddDefaultCharset utf-8
 
+#Отключение волшебных кавычек
+php_flag magic_quotes_gpc Off
+
 #Заприщает просмотр каталога если там нет индексного файла
 Options -Indexes
 

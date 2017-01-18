@@ -90,7 +90,6 @@
     $(document).ready(function () {
         $(".categories").dcAccordion();
 
-
         $("#form-wrap").dialog({
             autoOpen: false,
             width: 450,
@@ -107,11 +106,24 @@
                         parent = $('#parent').val(),
                         productId = <?=$product_id?>;
                     if (commentText == '' || commentAuthor == '') {
-                        alert('Не заполнены все поля!')
+                        alert('Не заполнены все поля!');
                         return;
                     }
                     $('#comment_text').val('');
                     $(this).dialog('close');
+                    $.ajax({
+                        url: '<?=PATH?>add_comment',
+                        type: 'POST',
+                        data: {commentAuthor: commentAuthor, commentText: commentText, parent: parent, productId: productId},
+                        success: function (res) {
+                            var result = JSON.parse(res);
+                            console.log(result);
+                        },
+                        error: function () {
+                            alert("Ошибка!");
+                        }
+                        
+                    });
                 },
                 "Отмена": function () {
                     $(this).dialog('close');
