@@ -1,5 +1,5 @@
-<?php defined("CATALOG") or die("Access denied"); ?>
-<?php
+<?php defined("CATALOG") or die("Access denied");
+
 /**
  * Ф-я получения Страницы
  */
@@ -10,4 +10,5 @@ function get_one_page($page_alias){
     $res = mysqli_query($connection, $query);
 
     return mysqli_fetch_assoc($res);
+
 }

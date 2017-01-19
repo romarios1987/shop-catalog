@@ -3,11 +3,18 @@
 /**
  * Ф-я для удобной разпечатки массивов
  */
-
-function print_arr($array)
-{
+function print_arr($array){
     echo "<pre>" . print_r($array, true) . "</pre>";
 }
+
+/**
+ * Функция Редиректа
+ */
+function redirect(){
+    $redirect = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : PATH;
+    header("Location: $redirect");
+    exit;
+};
 
 
 /**
@@ -28,7 +35,6 @@ function get_pages(){
 /**
  * Получаем данные из таблицы категорий
  */
-
 function get_cat()
 {
     global $connection;

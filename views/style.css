@@ -282,6 +282,37 @@ button.open-form:hover,
     background: #B2EBF2;
 }
 
+/*auth*/
+.auth{
+    margin: 0 0 20px 0;
+}
+.auth label,
+.auth input{
+    width: auto;
+    float: none;
+    display: block;
+}
+.auth p{
+    margin: 0;
+}
+p.submit{
+    margin: 5px 0 0 0;
+}
+
+.error{
+    padding: 5px;
+    border: gray dashed 1px;
+    background: #FFEDED;
+    color: #7F5354;
+}
+
+.ok{
+    padding: 5px;
+    border: 1px solid #ADC092;
+    background: #F0FAF1;
+    color: #58715E;
+}
+
 /*Footer*/
 .main-footer {
     padding: 30px 0;
