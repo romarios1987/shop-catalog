@@ -30,6 +30,7 @@ extract($match);
 // $id_category - ID категории
 // $product_alias - alias продукта
 // $view - вид для подключения
+include 'config.php';
 include "controllers/{$view}_controller.php";
 
 

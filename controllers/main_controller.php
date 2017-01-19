@@ -1,6 +1,5 @@
-<?php defined("CATALOG") or die("Access denied"); ?>
-<?php
-include 'config.php';
+<?php defined("CATALOG") or die("Access denied");
+
 include 'models/main_model.php';
 
 $categories = get_cat();

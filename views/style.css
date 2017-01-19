@@ -256,6 +256,32 @@ button.open-form:hover,
 
 
 
+/*Loader*/
+#loader{
+    position: fixed;
+    display: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity:.9;
+}
+#loader span{
+    display: block;
+    background: url("images/ajax-loader.gif");
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin: -7px 0 0 -56px;
+}
+
+.new-comment{
+    display: none;
+    background: #B2EBF2;
+}
+
 /*Footer*/
 .main-footer {
     padding: 30px 0;

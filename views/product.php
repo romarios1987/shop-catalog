@@ -45,7 +45,7 @@
                             <p>Такого товара нету!</p>
                         <?php endif; ?>
                         <hr>
-                        <h3>Отзывы к товару (0)</h3>
+                        <h3>Отзывы к товару (<?=$count_comments;?>)</h3>
                         <ul class="comments">
                             <?php echo $comments; ?>
                         </ul>
@@ -63,6 +63,8 @@
                                 <!-- <p><input type="submit" value="Добавить" name="submit"></p>-->
                             </form>
                         </div>
+                        <div id="loader"><span></span></div>
+                        <div id="errors"></div>
                     </main>
                 </div>
             </div>
@@ -90,6 +92,16 @@
     $(document).ready(function () {
         $(".categories").dcAccordion();
 
+        $('#errors').dialog({
+            autoOpen: false,
+            width: 450,
+            modal: true,
+            title: 'Сообщении об ошибке!',
+            show: {effect: 'slide', duration: 700},
+            hide: {effect: 'clip', duration: 700}
+        });
+
+
         $("#form-wrap").dialog({
             autoOpen: false,
             width: 450,
@@ -114,15 +126,57 @@
                     $.ajax({
                         url: '<?=PATH?>add_comment',
                         type: 'POST',
-                        data: {commentAuthor: commentAuthor, commentText: commentText, parent: parent, productId: productId},
+                        data: {
+                            commentAuthor: commentAuthor,
+                            commentText: commentText,
+                            parent: parent,
+                            productId: productId
+                        },
+                        beforeSend: function () {
+                            $('#loader').fadeIn();
+                        },
+
                         success: function (res) {
                             var result = JSON.parse(res);
-                            console.log(result);
+                            if (result.answer == 'Комментарий добавлен!'){
+                                // Если комментарий добавлен
+                                var  showComment = '<li class="new-comment" id="comment-'+ result.id +'">'+ result.code +'</li>';
+                                if (parent == 0){
+                                    $('ul.comments').append(showComment); // Если ето не ответ
+                                }else {
+                                    // Если ответ
+                                    // Находим родителя li
+                                    var parentComment = $clickAnswer.closest('li');
+                                    console.log(parentComment);
+                                    // Есть ли ответы
+                                    var childs = parentComment.children('ul');
+                                    if (childs.length){
+                                        // Если есть ответы
+                                        childs.append(showComment);
+                                    }else {
+                                        // Если пока ответов нет
+                                        parentComment.append('<ul>' + showComment + '</ul>');
+                                    }
+                                }
+                                $('#comment-'+ result.id).delay(1000).show('shake', 1000)
+                            }else {
+                                // Если комментарий Не добавлен
+                                $('#errors').text(result.answer);
+                                $('#errors').delay(1000).queue(function () { // queue() - Ставим на очередь
+                                    $(this).dialog('open');
+                                    $(this).dequeue(); // dequeue() - продолжаем на очередь
+                                });
+                            }
+
+
                         },
                         error: function () {
                             alert("Ошибка!");
+                        },
+                        complete: function () {
+                            $('#loader').delay(1000).fadeOut();
                         }
-                        
+
                     });
                 },
                 "Отмена": function () {
@@ -134,6 +188,7 @@
         $(".open-form").click(function () {
             $("#form-wrap").dialog('open');
             var parent = $(this).attr('data');
+            $clickAnswer = $(this);
             if (!parseInt(parent)) parent = 0;
             $('input[name="parent"]').val(parent);
         });

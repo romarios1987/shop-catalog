@@ -25,12 +25,31 @@ function add_comment(){
     $query = "INSERT INTO comments (comment_author, comment_text, parent, comment_product) 
               VALUES('$comment_author', '$comment_text', $parent, $comment_product)";
     $res = mysqli_query($connection, $query);
+
     if (mysqli_affected_rows($connection) > 0){
-        $res = ['answer' => 'Комментарий добавлен!'];
-        return json_encode($res);
+        $comment_id = mysqli_insert_id($connection);
+        $comment_html = get_last_comment($comment_id);
+        return $comment_html;
     }else{
         $res = ['answer' => 'Ошибка добавления комментария!'];
         return json_encode($res);
     }
+}
+
+/**
+ * Подучения добавленого комментария
+ */
+function get_last_comment($comment_id){
+    global $connection;
+    $query = "SELECT * FROM comments WHERE  comment_id = $comment_id ORDER BY comment_id";
+    $res = mysqli_query($connection, $query);
+    $comment = mysqli_fetch_assoc($res);
+    ob_start();
+    include 'views/new_comment.php';
+    $comment_html = ob_get_clean();
+
+    $res = ['answer' => 'Комментарий добавлен!', 'code' => $comment_html, 'id' => $comment_id];
+    return json_encode($res);
+
 
 }

@@ -12,6 +12,9 @@ $id_category = $get_one_product['parent'];  // Получаем ID катего�
 
 
 $product_id = $get_one_product['id']; // id товара
+
+$count_comments = count_comments($product_id); // Получаем Количество комментариев к товару
+
 $get_comments = get_comments($product_id); // Получаем комментарии к товару
 $comments_tree = map_tree($get_comments); // Дерево для коментариев
 $comments = categories_to_string($comments_tree, 'comments_template.php'); // Получаем HTML Код комментариев
