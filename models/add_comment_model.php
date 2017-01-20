@@ -1,7 +1,7 @@
 <?php defined("CATALOG") or die("Access denied"); ?>
 <?php
 /**
- * Ф-я получения Комментариев
+ * Ф-я добавления коментария
  */
 function add_comment(){
     global $connection;
@@ -9,6 +9,7 @@ function add_comment(){
     $comment_text = trim(mysqli_real_escape_string($connection, $_POST['commentText']));
     $parent = (int)$_POST['parent'];
     $comment_product = (int)$_POST['productId'];
+    $is_admin = isset($_SESSION['auth']['is_admin']) ? $_SESSION['auth']['is_admin']:0;
 
 
     // ПРОВЕРКИ
@@ -22,8 +23,8 @@ function add_comment(){
         $res = ['answer' => 'Не заполнены все поля!'];
         return json_encode($res);
     }
-    $query = "INSERT INTO comments (comment_author, comment_text, parent, comment_product) 
-              VALUES('$comment_author', '$comment_text', $parent, $comment_product)";
+    $query = "INSERT INTO comments (comment_author, comment_text, parent, comment_product, is_admin) 
+              VALUES('$comment_author', '$comment_text', $parent, $comment_product, $is_admin)";
     $res = mysqli_query($connection, $query);
 
     if (mysqli_affected_rows($connection) > 0){

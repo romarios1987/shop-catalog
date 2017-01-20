@@ -12,7 +12,8 @@ $routes = [
     array('url' => '#^category/(?P<id_category>\d+)#i', 'view' => 'category'),
     array('url' => '#^page/(?P<page_alias>[a-z0-9-]+)#i', 'view' => 'page'),
     array('url' => '#^add_comment#i', 'view' => 'add_comment'),
-    array('url' => '#^login#i', 'view' => 'login')
+    array('url' => '#^login#i', 'view' => 'login'),
+    array('url' => '#^logout#i', 'view' => 'logout')
 ];
 
 $url = ltrim($_SERVER['REQUEST_URI'], '/');
