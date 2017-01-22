@@ -34,7 +34,80 @@ function forgot(){
         }else{
             $_SESSION['auth']['errors'] = 'Пользователь с таким email не найден!';
         }
+    }
+}
 
+/**
+ * Проверка пользователя на изменения пароля
+ */
+function access_change(){
+    global $connection;
+    $hash = trim(mysqli_real_escape_string($connection, $_GET['forgot']));
+    // Если нет хеша
+    if (empty($hash)){
+        $_SESSION['forgot']['errors'] = "Перейдите по коректной ссылке";
+        return;
+    }
+    $query = "SELECT * FROM forgot WHERE hash = '$hash' LIMIT 1";
+    $res = mysqli_query($connection, $query);
+    // Если не найден хеш
+    if (!mysqli_num_rows($res)){
+        $_SESSION['forgot']['errors'] = "Ссылка устарела или вы перешли по не коректной ссылке. Пройдите процедуру востановления пароля заново";
+        return;
     }
 
+    $now = time();
+    $row = mysqli_fetch_assoc($res);
+    // Если ссылка устарела
+    if ($row['expire'] - $now < 0){
+        $_SESSION['forgot']['errors'] = "Ссылка устарела. Пройдите процедуру востановления пароля заново";
+        return;
+    }
 }
+
+/**
+ * Смена пароля
+ */
+function change_forgot_password(){
+    global $connection;
+    $hash = trim(mysqli_real_escape_string($connection, $_POST['hash']));
+    $password = trim($_POST['new_password']);
+
+    if (empty($password)){
+        $_SESSION['forgot']['change_error'] = "Не введен пароль!";
+        return;
+    }
+    $query = "SELECT * FROM forgot WHERE hash = '$hash' LIMIT 1";
+    $res = mysqli_query($connection, $query);
+    // Если не найден хеш
+    if (!mysqli_num_rows($res))return;
+
+    $now = time();
+    $row = mysqli_fetch_assoc($res);
+    // Если ссылка устарела
+    if ($row['expire'] - $now < 0){
+        mysqli_query($connection, "DELETE FROM forgot WHERE expire < $now");
+        return;
+    }
+    $password = md5($password);
+    mysqli_query($connection, "UPDATE users SET password = '$password' WHERE email ='{$row['email']}'");
+    mysqli_query($connection, "DELETE FROM forgot WHERE email = '{$row['email']}'");
+    $_SESSION['forgot']['ok'] = "Вы успешно сменили пароль!";
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
