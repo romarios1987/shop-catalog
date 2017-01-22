@@ -94,5 +94,6 @@
         })
     })
 </script>
+<script src="<?= PATH ?>views/js/workscript.js"></script>
 </body>
 </html>

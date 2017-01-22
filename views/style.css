@@ -313,6 +313,11 @@ p.submit{
     color: #58715E;
 }
 
+#forgot{
+    display: none;
+}
+
+
 /*Footer*/
 .main-footer {
     padding: 30px 0;
