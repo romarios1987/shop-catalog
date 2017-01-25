@@ -60,6 +60,9 @@
                     </form>
 
                 </div>
+                <?php if (isset($_SESSION['reg']['errors'])): ?>
+                    <br><div class="error"><?=$_SESSION['reg']['errors']; unset($_SESSION['reg']);?></div>
+                <?php endif; ?>
             </main>
         </div>
     </div>

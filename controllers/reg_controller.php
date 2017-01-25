@@ -7,6 +7,10 @@ if (isset($_POST['value'])){
     exit;
 }
 
+if (isset($_POST['reg'])){
+    registration();
+    redirect();
+}
 
 $breadcrumbs = "<a href='". PATH ."'>Главная</a> / Регистрация";
 
