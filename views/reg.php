@@ -46,11 +46,11 @@
                             <input type="text" name="name_reg" id="name_reg">
                         </p>
                         <p><label for="email_reg">Email</label>
-                            <input type="email" name="email_reg" id="email_reg">
+                            <input type="email" class="access" data-field="email" name="email_reg" id="email_reg">
                             <span></span>
                         </p>
                         <p><label for="login_reg">Логин</label>
-                            <input type="text" name="login_reg" id="login_reg">
+                            <input type="text" class="access" data-field="login" name="login_reg" id="login_reg">
                             <span></span>
                         </p>
                         <p><label for="password_reg">Пароль</label>
@@ -74,6 +74,36 @@
 <script>
     $(document).ready(function () {
         $(".categories").dcAccordion();
+
+
+        /*** -------Ajax проверка на ввод логина и емейла при регистрации----------- ***/
+        $(".access").change(function () {
+            var $this = $(this),
+                value = $.trim($this.val()),
+                dataField = $this.attr('data-field'),
+                span = $this.next();
+
+            if (value == '') {
+                span.removeClass().addClass('reg-cross');
+            } else {
+                span.removeClass().addClass('reg-loader');
+                $.ajax({
+                    url: '<?=PATH?>reg',
+                    type: 'POST',
+                    data: {value: value, dataField: dataField},
+                    success: function (res) {
+                        if (res == 'no') {
+                            span.removeClass().addClass('reg-cross');
+                        } else {
+                            span.removeClass().addClass('reg-check');
+                        }
+                    }
+                });
+            }
+        });
+        /*** -------Ajax проверка----------- ***/
+
+
     })
 </script>
 <script src="<?= PATH ?>views/js/workscript.js"></script>
