@@ -78,7 +78,7 @@ header{
     margin: 20px;
 }
 .main-menu ul li:last-child{
-    margin-right: 0px;
+    margin-right: 0;
 }
 
 .categories{
@@ -223,7 +223,7 @@ header{
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
-    background: #FFF url('img/bg.jpg') left top repeat-x;
+    background: #FFF;
 }
 
 .form input:hover, .form textarea:hover, .form select:hover,
@@ -315,6 +315,23 @@ p.submit{
 
 #forgot{
     display: none;
+}
+
+
+
+.reg-check, .reg-loader, .reg-cross{
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+}
+.reg-check{
+    background: url("images/check.png");
+}
+.reg-cross{
+    background: url("images/cross.png");
+}
+.reg-loader{
+    background: url("images/loader2.gif");
 }
 
 

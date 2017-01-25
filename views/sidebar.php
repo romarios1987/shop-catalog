@@ -11,7 +11,7 @@
                     <input type="password" name="password" id="password"></p>
                 <p class="submit"><input type="submit" value="Войти" name="log_in"></p>
             </form>
-            <p><a href="#">Регистрация</a> | <a href="#" id="forgot-link">Забыли пароль?</a></p>
+            <p><a href="<?=PATH?>reg">Регистрация</a> | <a href="#" id="forgot-link">Забыли пароль?</a></p>
             <?php if (isset($_SESSION['auth']['errors'])): ?>
                 <div class="error"><?= $_SESSION['auth']['errors']; ?></div>
                 <?php unset($_SESSION['auth']); ?>
