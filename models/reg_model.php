@@ -4,7 +4,8 @@
  *Проверка доступности поля при регистрации
  */
 
-function access_field(){
+function access_field()
+{
     global $connection;
     $fields = ['login', 'email'];
     $value = trim(mysqli_real_escape_string($connection, $_POST['value']));
@@ -39,8 +40,8 @@ function registration(){
     if (empty($email)) $errors .= '<li>Не указан email</li>';
     if (empty($login)) $errors .= '<li>Не указан логин</li>';
     if (empty($password)) $errors .= '<li>Не указан пароль</li>';
-    
-    if (!empty($errors)){
+
+    if (!empty($errors)) {
         // Не заполненые обязательные поля
         $_SESSION['reg']['errors'] = "Не заполненые обязательные поля: <ul>{$errors}</ul>";
         return;
@@ -49,24 +50,38 @@ function registration(){
     $email = mysqli_real_escape_string($connection, $email);
     $login = mysqli_real_escape_string($connection, $login);
     $password = md5($password);
+    $post = [$login, $email];
 
     // Проверка дублирования данных
     $query = "SELECT login, email FROM users WHERE login = '$login' OR email = '$email'";
     $res = mysqli_query($connection, $query);
-    if (mysqli_num_rows($res) > 0){
+    if (mysqli_num_rows($res) > 0) {
         $data = [];
-        while ($row = mysqli_fetch_assoc($res)){
+        while ($row = mysqli_fetch_assoc($res)) {
             // берем то, что совпадает с содержимым $_POST, т.е - дубликаты
-            $data = array_intersect($row, $_POST);
-            foreach ($data as $key => $val){
+            $data = array_intersect($row, $post);
+            foreach ($data as $key => $val) {
                 $keys[$key] = $key;
             }
         }
-        foreach ($keys as $key => $val){
+        foreach ($keys as $key => $val) {
             $errors .= "<li>{$fields[$key]}</li>";
         }
         $_SESSION['reg']['errors'] = "Выберите другие значения для полей: <ul>{$errors}</ul>";
         return;
+    }
+
+    // Добавляем пользователей в базу
+    $query = "INSERT INTO users (login, password, email, name)
+              VALUES ('$login', '$password', '$email', '$name')";
+    $res = mysqli_query($connection, $query);
+    if (mysqli_affected_rows($connection) > 0){
+        $_SESSION['reg']['success'] = "Регистрация пройшла успешно!";
+        $_SESSION['auth']['user'] = stripcslashes($name);
+        $_SESSION['auth']['is_admin'] = 0;
+    }else{
+        // Ошибка добавления
+        $_SESSION['reg']['errors'] = "Ошибка регистрации";
     }
 
 
