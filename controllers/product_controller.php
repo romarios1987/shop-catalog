@@ -28,4 +28,4 @@ $comments = categories_to_string($comments_tree, 'comments_template.php'); // П
 
 include 'libs/breadcrumbs.php';
 
-include "views/{$view}.php";
+include TEMPLATE . "{$view}.php";

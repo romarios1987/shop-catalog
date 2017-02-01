@@ -6,9 +6,9 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?= PATH ?>views/bootstrap-grid.css">
-    <link rel="stylesheet" href="<?= PATH ?>views/style.css">
-    <link rel="stylesheet" href="<?= PATH ?>views/css/jquery-ui.css">
+    <link rel="stylesheet" href="<?= PATH . TEMPLATE ?>css/bootstrap-grid.css">
+    <link rel="stylesheet" href="<?= PATH . TEMPLATE ?>css/style.css">
+    <link rel="stylesheet" href="<?= PATH . TEMPLATE ?>css/jquery-ui.css">
     <title><?= strip_tags($breadcrumbs); ?></title>
 </head>
 <body>
@@ -88,10 +88,10 @@
     </footer><!--main-footer-->
 </div> <!--wrapper-->
 
-<script src="<?= PATH ?>views/js/jquery-1.9.0.min.js"></script>
-<script src="<?= PATH ?>views/js/jquery-ui.min.js"></script>
-<script src="<?= PATH ?>views/js/jquery.accordion.js"></script>
-<script src="<?= PATH ?>views/js/jquery.cookie.js"></script>
+<script src="<?= PATH . TEMPLATE ?>js/jquery-1.9.0.min.js"></script>
+<script src="<?= PATH . TEMPLATE ?>js/jquery-ui.min.js"></script>
+<script src="<?= PATH . TEMPLATE ?>js/jquery.accordion.js"></script>
+<script src="<?= PATH . TEMPLATE ?>js/jquery.cookie.js"></script>
 
 
 <script>
@@ -200,7 +200,7 @@
         });
     })
 </script>
-<script src="<?= PATH ?>views/js/workscript.js"></script>
+<script src="<?= PATH . TEMPLATE ?>js/workscript.js"></script>
 </body>
 </html>
 

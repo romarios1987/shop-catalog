@@ -85,7 +85,7 @@ function categories_to_string($array_categories, $template = 'category_template.
 function categories_to_template($category, $template)
 {
     ob_start(); // Начинаем буферизацию вывода
-    include "views/{$template}";
+    include TEMPLATE . "{$template}";
     return ob_get_clean(); // Очищаем буфер
 }
 
@@ -124,31 +124,31 @@ function pagination($page, $count_pages, $modrew = true)
     }
 
     if ($page > 1) {
-        $back = "<a class='nav-link' href='{$uri}page=" . ($page - 1) . "'>&lt;</a>";
+        $back = "<li><a class='nav-link' href='{$uri}page=" . ($page - 1) . "'>Назад</a></li>";
     }
     if ($page < $count_pages) {
-        $forward = "<a class='nav-link' href='{$uri}page=" . ($page + 1) . "'>&gt;</a>";
+        $forward = "<li><a class='nav-link' href='{$uri}page=" . ($page + 1) . "'>Вперед</a></li>";
     }
     if ($page > 3) {
-        $startpage = "<a class='nav-link' href='{$uri}page=1'>&laquo;</a>";
+        $startpage = "<li><a class='nav-link' href='{$uri}page=1'>В начало</a></li>";
     }
     if ($page < ($count_pages - 2)) {
-        $endpage = "<a class='nav-link' href='{$uri}page={$count_pages}'>&raquo;</a>";
+        $endpage = "<li><a class='nav-link' href='{$uri}page={$count_pages}'>В конец</a></li>";
     }
     if ($page - 2 > 0) {
-        $page2left = "<a class='nav-link' href='{$uri}page=" . ($page - 2) . "'>" . ($page - 2) . "</a>";
+        $page2left = "<li><a class='nav-link' href='{$uri}page=" . ($page - 2) . "'>" . ($page - 2) . "</a></li>";
     }
     if ($page - 1 > 0) {
-        $page1left = "<a class='nav-link' href='{$uri}page=" . ($page - 1) . "'>" . ($page - 1) . "</a>";
+        $page1left = "<li><a class='nav-link' href='{$uri}page=" . ($page - 1) . "'>" . ($page - 1) . "</a></li>";
     }
     if ($page + 1 <= $count_pages) {
-        $page1right = "<a class='nav-link' href='{$uri}page=" . ($page + 1) . "'>" . ($page + 1) . "</a>";
+        $page1right = "<li><a class='nav-link' href='{$uri}page=" . ($page + 1) . "'>" . ($page + 1) . "</a></li>";
     }
     if ($page + 2 <= $count_pages) {
-        $page2right = "<a class='nav-link' href='{$uri}page=" . ($page + 2) . "'>" . ($page + 2) . "</a>";
+        $page2right = "<li><a class='nav-link' href='{$uri}page=" . ($page + 2) . "'>" . ($page + 2) . "</a></li>";
     }
 
-    return $startpage . $back . $page2left . $page1left . '<a class="nav-active">' . $page . '</a>' . $page1right . $page2right . $forward . $endpage;
+    return $startpage . $back . $page2left . $page1left . '<li class="active-page">' . $page . '</li>' . $page1right . $page2right . $forward . $endpage;
 }
 
 /**

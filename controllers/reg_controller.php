@@ -14,4 +14,4 @@ if (isset($_POST['reg'])){
 
 $breadcrumbs = "<a href='". PATH ."'>Главная</a> / Регистрация";
 
-include "views/{$view}.php";
+include TEMPLATE . "{$view}.php";

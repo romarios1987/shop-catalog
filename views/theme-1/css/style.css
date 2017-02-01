@@ -268,7 +268,7 @@ button.open-form:hover,
 }
 #loader span{
     display: block;
-    background: url("images/ajax-loader.gif");
+    background: url("../images/ajax-loader.gif");
     width: 25px;
     height: 25px;
     position: absolute;
@@ -324,13 +324,13 @@ p.submit{
     height: 16px;
 }
 .reg-check{
-    background: url("images/check.png");
+    background: url("../images/check.png");
 }
 .reg-cross{
-    background: url("images/cross.png");
+    background: url("../images/cross.png");
 }
 .reg-loader{
-    background: url("images/loader2.gif");
+    background: url("../images/loader2.gif");
 }
 
 

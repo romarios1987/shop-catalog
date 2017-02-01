@@ -13,4 +13,4 @@ if (!$page){
 
 $breadcrumbs = "<a href='". PATH ."'>Главная</a> / {$page['title']}";
 
-include "views/{$view}.php";
+include TEMPLATE . "{$view}.php";

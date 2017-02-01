@@ -1,8 +1,10 @@
 <?php
-define("CATALOG", true);
 error_reporting(E_ALL);
+define("CATALOG", true);
 
 session_start();
+include 'config.php';
+
 /**
  * Функция маршрутизации (Роутинга)
  */
@@ -28,7 +30,7 @@ foreach ($routes as $route) {
 }
 
 if (empty($match)) {
-    include 'views/404.php';
+    include TEMPLATE . '404.php';
     exit;
 }
 extract($match);
@@ -36,7 +38,6 @@ extract($match);
 // $id_category - ID категории
 // $product_alias - alias продукта
 // $view - вид для подключения
-include 'config.php';
 include "controllers/{$view}_controller.php";
 
 

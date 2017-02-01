@@ -46,7 +46,7 @@ function get_last_comment($comment_id){
     $res = mysqli_query($connection, $query);
     $comment = mysqli_fetch_assoc($res);
     ob_start();
-    include 'views/new_comment.php';
+    include TEMPLATE . 'new_comment.php';
     $comment_html = ob_get_clean();
 
     $res = ['answer' => 'Комментарий добавлен!', 'code' => $comment_html, 'id' => $comment_id];

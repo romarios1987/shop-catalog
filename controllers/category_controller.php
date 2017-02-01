@@ -40,6 +40,6 @@ $products = get_products($ids, $start_pos, $perpage);
 
 
 
-include "views/{$view}.php";
+include TEMPLATE . "{$view}.php";
 
 
