@@ -85,7 +85,7 @@ function categories_to_string($array_categories, $template = 'category_template.
 function categories_to_template($category, $template)
 {
     ob_start(); // Начинаем буферизацию вывода
-    include TEMPLATE . "{$template}";
+    include "views/{$template}";
     return ob_get_clean(); // Очищаем буфер
 }
 
@@ -163,7 +163,7 @@ function breadcrumbs($categories, $id_category)
 
     for ($i = 0; $i < $count; $i++) {
         if (isset($categories[$id_category])) {
-            $breadcrumbs_array[$categories[$id_category]['id']] = $categories[$id_category]['title'];
+            $breadcrumbs_array[$categories[$id_category]['alias']] = $categories[$id_category]['title'];
             $id_category = $categories[$id_category]['parent'];
         } else break;
     }

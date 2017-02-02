@@ -4,11 +4,10 @@
 // return true (array not empty) || false
 $breadcrumbs_array = breadcrumbs($categories, $id_category);
 
-
 if ($breadcrumbs_array) {
     $breadcrumbs = "<a href='" . PATH . "'>Главная</a> / ";
-    foreach ($breadcrumbs_array as $id => $title) {
-        $breadcrumbs .= "<a href='" . PATH . "category/{$id}'>{$title}</a> / ";
+    foreach ($breadcrumbs_array as $alias => $title) {
+        $breadcrumbs .= "<a href='" . PATH . "category/{$alias}'>{$title}</a> / ";
     }
     if (!isset($get_one_product)) {
         $breadcrumbs = rtrim($breadcrumbs, " / ");

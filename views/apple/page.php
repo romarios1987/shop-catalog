@@ -5,7 +5,7 @@
 
         <div class="content">
             <ul class="breadcrumbs">
-                <?=$breadcrumbs_list;?>
+                <?=$breadcrumbs;?>
             </ul>
 
         <div class="content-page">

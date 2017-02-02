@@ -3,7 +3,10 @@
 include 'main_controller.php';
 include "models/{$view}_model.php";
 
-if (!isset($id_category)) $id_category = null;
+if (!isset($category_alias)) $category_alias = null;
+$id_category = get_id($categories, $category_alias);
+
+//if (!isset($id_category)) $id_category = null;
 
 include 'libs/breadcrumbs.php';
 // id  дочерних категорий

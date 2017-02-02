@@ -810,7 +810,9 @@ ul.catalog li ul li {
 
  */
 
-
+#forgot{
+    display: none;
+}
 
 
 

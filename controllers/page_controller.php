@@ -11,6 +11,6 @@ if (!$page){
     exit;
 }
 
-$breadcrumbs = "<a href='". PATH ."'>Главная</a> / {$page['title']}";
+$breadcrumbs = "<li><a href='". PATH ."'>Главная</a></li> - <li>{$page['title']}</li>";
 
 include TEMPLATE . "{$view}.php";

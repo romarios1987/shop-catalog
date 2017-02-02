@@ -8,5 +8,3 @@ $categories_menu = categories_to_string($categories_tree);
 
 /*** Получения страниц меню ***/
 $pages = get_pages();
-
-

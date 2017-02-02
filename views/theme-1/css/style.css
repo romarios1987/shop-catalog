@@ -117,6 +117,10 @@ header{
     text-decoration: underline;
 }
 
+.pagination li{
+    display: inline-block;
+}
+
 .pagination{
     margin: 20px;
     text-align: center;
